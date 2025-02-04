@@ -1,27 +1,20 @@
 const http = require("http");
 const express = require("express");
+const app = express();
+
 //const server = http.createServer(app);
 const bodyParser = require("body-parser");
-
-const app = express();
+const adminRoutes = require("./routes/Admin");
+const shopRoute = require("./routes/Shop");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use("/add-product", (req, res, next) => {
-  res.send(
-    `<form action="/product" method="POST" name="add-product"><label>Name:</lable><input type="text" name="title" /><br></br><label>Number:</lable><input type="number" name="numberofprod" /><br></br><button type="submit">SUBMIT</button></form>`
-  );
-});
+app.use("/admin", adminRoutes);
+app.use(shopRoute);
 
-app.post("/product", (req, res, next) => {
-  console.log(req.body);
-  res.redirect("/");
+app.use((req, res, next) => {
+  res.status(404).send(`<h1>Page not found</h1>`);
 });
-
-app.use("/", (req, res, next) => {
-  res.send(`<h1>Welcome to Express home JS</h1>`);
-});
-
 app.listen(4000, () => {
   console.log("Server started on port 4000");
 });
