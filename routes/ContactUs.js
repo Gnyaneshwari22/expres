@@ -3,13 +3,13 @@ const router = express.Router();
 const path = require("path");
 const rootDir = require("../util/path");
 
-router.get("/add-product", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "../", "views", "add-product.html"));
+router.get("/contact-us", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "../", "views", "contactUs.html"));
 });
 
-router.post("/add-product", (req, res, next) => {
+router.post("/contact-us", (req, res, next) => {
   console.log(req.body);
-  res.redirect("/");
+  res.redirect("/success");
 });
 
 module.exports = router;
